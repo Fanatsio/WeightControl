@@ -1,31 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
-import csv
-import os
+from .data_utils import load_data, save_data
 from datetime import datetime
-
-FILENAME = "weights.csv"
-
-def load_data():
-    if not os.path.exists(FILENAME):
-        return [], []
-    with open(FILENAME, "r", encoding="utf-8", newline="") as f:
-        reader = list(csv.reader(f))
-        if not reader:
-            return [], []
-        header = reader[0]
-        rows = reader[1:]
-        return header, rows
-
-def save_data(header, rows):
-    try:
-        rows.sort(key=lambda r: datetime.strptime(r[0], "%Y-%m-%d"))
-    except Exception:
-        pass
-    with open(FILENAME, "w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(header)
-        writer.writerows(rows)
 
 class WeightApp:
     def __init__(self, root):
@@ -129,7 +105,10 @@ class WeightApp:
             self.refresh_table()
             messagebox.showinfo("Успех", f"Запись за {date} удалена.")
 
-if __name__ == "__main__":
+def main():
     root = tk.Tk()
     app = WeightApp(root)
     root.mainloop()
+
+if __name__ == "__main__":
+    main()
