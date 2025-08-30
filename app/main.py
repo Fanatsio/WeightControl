@@ -6,7 +6,7 @@ from datetime import datetime
 class WeightApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Вес семьи (CSV)")
+        self.root.title("Вес семьи")
         
         self.header, self.rows = load_data()
         if not self.header:
@@ -107,7 +107,7 @@ class WeightApp:
 
 def main():
     root = tk.Tk()
-    app = WeightApp(root)
+    _ = WeightApp(root)
     root.mainloop()
 
 if __name__ == "__main__":
